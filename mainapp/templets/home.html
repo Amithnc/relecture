@@ -3,7 +3,7 @@
 {% block body %}
 <style>
     .carousel-item {
-  height: 550px;
+  height: 300px;
 }
 
 .carousel-item img {
@@ -22,12 +22,18 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+        <li>
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {%else%}
         <li class="nav-item">
             <a class="nav-link" href="/register">Register</a>
           </li>
         <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
         </li>
+        {% endif %}
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search experts..." aria-label="Search">
@@ -45,7 +51,7 @@
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="/media/images/What WE DO.png" class="d-block w-100" alt="a">
+            <img src="/media/images/1.png" class="d-block w-100" alt="a">
           </div>
         </div>
       </div>

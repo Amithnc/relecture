@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import Group
+from django.contrib import auth
 
 def homepage(request):
     return render (request,'home.html')
@@ -43,4 +44,14 @@ def register(request):
                 messages.success(request, 'Created successfully please login with your username')
                 return redirect("/")
     return render(request,'register.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return render(request,'home.html')
+
+
+@login_required(login_url='/login')
+def dashboard(request):
+    return render(request,'dashboard.html')
 
