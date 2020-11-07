@@ -36,6 +36,12 @@
     </div>
   </nav><br><br>
 <div class="container">
+    {% if messages %}
+    <div>
+    {% for message in messages %}
+            <div id="alert" class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert"  ><h5><strong> {{ message }}</strong></h5></div>
+    {% endfor %}
+    {% endif %}
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">

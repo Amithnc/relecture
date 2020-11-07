@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}RElecture-resister{% endblock title %}
+{% block body %}
+<div class="accordion" id="accordionExample">
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-info text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                ORGANIZATION Registration
+              </button>
+                <button class="btn btn-info text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Experts Registration
+                </button>
+        </div>
+      </div>
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="container col-4 form">
+                {% if messages %}
+                <div>
+                {% for message in messages %}
+                        <div id="alert" class="alert {% if message.tags %}alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}{{ message.tags }}{% endif %}{% endif %}" role="alert"  ><h5><strong> {{ message }}</strong></h5></div>
+                {% endfor %}
+                {% endif %}
+                        <div class="card card-outline-secondary" style="width: 500px;">
+                            <div class="card-body">
+                                <h3 class="text-center">Organization Registration</h3>
+                                <hr>
+                                <form id="upload-form" action="{% url 'register' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="container">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                  <label>Organization Name:</label>
+                                                  <input type="text" class="form-control" name="org_name" placeholder="Enter Organization name" required="true">
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <div class="col">
+                                                  <label>password:</label>
+                                                  <input type="password" class="form-control" name="password" placeholder="Enter password" required="true">
+                                                </div>
+                                              </div>
+                                    </div>
+                                    <button class="btn btn-success" type="submit" name="type" value="Organization" >submit</button> 
+                                    <p class="text-right" ><a href="/" data-toggle="tooltip" title="GO BACK TO HOMEPAGE">
+                                        <button type="button" class="btn btn-warning">BACK</button>
+                                    </a></p>
+                                </form>
+                            </div>
+                        </div>
+              </div>
+        </div>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="container col-4 form">
+                        <div class="card card-outline-secondary" style="width: 500px;">
+                            <div class="card-body">
+                                <h3 class="text-center"> Expert Registration</h3>
+                                <hr>
+                                <form id="upload-form" action="{% url 'register' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="container">
+                                            <div class="form-group row">
+                                                <div class="col">
+                                                  <label>Name:</label>
+                                                  <input type="text" class="form-control" name="expert_name" placeholder="Enter your name" required="true">
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <div class="col">
+                                                  <label>password:</label>
+                                                  <input type="password" class="form-control" name="password" placeholder="Enter password" required="true">
+                                                </div>
+                                              </div>
+                                    </div>
+                                    <button class="btn btn-success" name="type" value="experts" type="submit">submit</button> 
+                                    <p class="text-right" ><a href="/" data-toggle="tooltip" title="GO BACK TO HOMEPAGE">
+                                        <button type="button" class="btn btn-warning">BACK</button>
+                                    </a></p>
+                                </form>
+                            </div>
+                        </div>
+              </div>
+        </div>
+      </div>
+  </div>
+
+{%endblock body%}

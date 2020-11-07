@@ -9,5 +9,6 @@ urlpatterns = [
                 'site_header': 'Log in to RElecture',
                 'site_title' : 'Login page-organization',
             })),
-    path('',views.homepage,name='homepage')        
+    path('',views.homepage,name='homepage'),
+    path('register/',views.register,name='register')      
 ]
