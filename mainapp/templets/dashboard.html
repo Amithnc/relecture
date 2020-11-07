@@ -1,3 +1,40 @@
 {% extends "base.html" %}
 {% block title %}RElecture-Dashboard{% endblock title %}
 {% block body %}
+{% load auth_extras %}
+{% if request.user|has_group:"experts" %} 
+    <p>experts</p> 
+{% endif %}
+{% if request.user|has_group:"organization" %} 
+<br>
+<h3 class="text text-center text-info">Dashboard-Organizations</h3>
+<h4><p class="badge badge-center badge-warning">These are The experts available right now :</p></h4>
+<div class="container  form">
+<table class="table table-bordered table-sm table-primary">
+    <thead>
+        <tr>
+          <th scope="col"><h6><strong>Expert Name</strong></h6></th>
+          <th scope="col"><h6><strong>Subject</strong></h6></th>
+          <th scope="col"><h6><strong>Action</strong></h6></th>
+        </tr>
+      </thead>
+      {% for expert in experts %}
+      <tbody>
+        <tr>
+          <th scope="row"><h6>{{ expert.username }}</h6></th>
+          <td><h6>....(tags)</h6></td>
+          <td><button class="badge badge-pill badge-success">view profile</button>
+            <button class="badge badge-pill badge-dark">send email</button>
+        </td>
+        </tr>
+    </tbody>
+    {%endfor%}
+</table> 
+<p class="text-center" >
+    <button type="button" class="btn btn-light">Post-requrements</button>
+    <a href="/" data-toggle="tooltip" title="GO BACK TO HOMEPAGE">
+    <button type="button" class="btn btn-warning">BACK</button>
+</a></p>
+</div>
+{% endif %}
+{%endblock body%}

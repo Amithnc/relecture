@@ -48,10 +48,18 @@ def register(request):
 
 def logout(request):
     auth.logout(request)
+    messages.success(request, 'logged-out successfully')
     return render(request,'home.html')
 
 
 @login_required(login_url='/login')
 def dashboard(request):
-    return render(request,'dashboard.html')
+    context={}
+    user=request.user
+    if user.groups.filter(name='organization').exists():
+        User = get_user_model()
+        all_experts=User.objects.filter(groups__name="experts")
+        context['experts']=all_experts
+
+    return render(request,'dashboard.html',context)
 
