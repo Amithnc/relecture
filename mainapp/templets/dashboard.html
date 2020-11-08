@@ -2,8 +2,37 @@
 {% block title %}RElecture-Dashboard{% endblock title %}
 {% block body %}
 {% load auth_extras %}
-{% if request.user|has_group:"experts" %} 
-    <p>experts</p> 
+{% if request.user|has_group:"experts" %}
+ <br>
+<h3 class="text text-center text-info">Dashboard-Experts</h3>
+<h4><p class="badge badge-center badge-warning">These are the latest post :</p></h4>
+<div class="container  form">
+<table class="table table-bordered table-sm table-primary">
+    <thead>
+        <tr>
+          <th scope="col"><h6><strong>organization Name</strong></h6></th>
+          <th scope="col"><h6><strong>Subject</strong></h6></th>
+          <th scope="col"><h6><strong>Action</strong></h6></th>
+        </tr>
+      </thead>
+      {% for post in posts %}
+      <tbody>
+        <tr>
+          <th scope="row"><h6>{{ post.organization }}</h6></th>
+          <td><h6>{{post.subject}}</h6></td>
+          <td><button class="badge badge-pill badge-success">view post</button>
+            <button class="badge badge-pill badge-dark">send email</button>
+        </td>
+        </tr>
+    </tbody>
+    {%endfor%}
+</table> 
+<p class="text-center" >
+    <a href="/" data-toggle="tooltip" title="GO BACK TO HOMEPAGE">
+    <button type="button" class="btn btn-warning">BACK</button>
+</a></p>
+</div>
+
 {% endif %}
 {% if request.user|has_group:"organization" %} 
 <br>
@@ -31,7 +60,9 @@
     {%endfor%}
 </table> 
 <p class="text-center" >
+  <a href="/admin/mainapp/post/add/" data-toggle="tooltip" title= "Post-requrements">
     <button type="button" class="btn btn-light">Post-requrements</button>
+  </a>
     <a href="/" data-toggle="tooltip" title="GO BACK TO HOMEPAGE">
     <button type="button" class="btn btn-warning">BACK</button>
 </a></p>

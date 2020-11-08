@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from django.contrib import auth
+from .models import post
 
 def homepage(request):
     return render (request,'home.html')
@@ -49,7 +49,7 @@ def register(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'logged-out successfully')
-    return render(request,'home.html')
+    return redirect("/")
 
 
 @login_required(login_url='/login')
@@ -60,6 +60,8 @@ def dashboard(request):
         User = get_user_model()
         all_experts=User.objects.filter(groups__name="experts")
         context['experts']=all_experts
-
+    elif user.groups.filter(name='experts').exists():
+        posts=post.objects.all()
+        context['posts']=posts
     return render(request,'dashboard.html',context)
 
